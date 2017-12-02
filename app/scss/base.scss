@@ -1,0 +1,27 @@
+/*  Basic resets for modern browsers */
+* {
+  margin:0;
+  padding:0;
+  text-decoration:none;
+  &:before, &:after {
+    box-sizing: inherit;
+  }
+}
+
+html {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100vh;
+}
+
+ul {
+  list-style: none;
+  display:inline-flex;
+}
+
+li { padding-left:1em; }
