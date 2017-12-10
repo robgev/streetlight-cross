@@ -1,11 +1,11 @@
 {
-  "name": "rocketbrains",
+  "name": "streetlight-cross",
   "version": "1.0.0",
-  "description": "The source code behind rocketbrains",
+  "description": "The source code behind streetlight-cross",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/robgev/rocketbrains"
+    "url": "https://github.com/robgev/streetlight-cross"
   },
   "scripts": {
     "watch": "node scripts/watch-project.js",
@@ -17,8 +17,8 @@
   "dependencies": {
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "serve-favicon": "^2.4.4"
   },
   "devDependencies": {
