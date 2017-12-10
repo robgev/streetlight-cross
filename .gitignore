@@ -9,3 +9,4 @@ public/css
 firebase-debug.log
 backend/server.js
 frontend
+.DS_Store

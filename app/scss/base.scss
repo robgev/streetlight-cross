@@ -107,3 +107,10 @@ li { padding-left:1em; }
   display: flex;
   justify-content: center;
 }
+
+.body-wrapper {
+  display: flex;
+  .simulation-container {
+    padding: 1em;
+  }
+}
