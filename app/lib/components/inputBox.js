@@ -37,7 +37,7 @@ class InputBox extends PureComponent {
           min={min}
           max={max}
           type='number'
-          placeholder={name}
+          placeholder={`${name} (Default: ${min})`}
           onChange={this.handleInputChange}
         />
         <p className={incorrect ? 'show' : ''}>

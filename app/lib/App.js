@@ -10,12 +10,12 @@ class App extends PureComponent {
   constructor() {
     super();
     this.state = {
-      v0: 0,
-      d0: 0,
-      L: 0,
-      Ty: 0,
-      aa: 0,
-      ad: 0,
+      v0: 20,
+      d0: 7,
+      L: 7,
+      Ty: 2,
+      aa: 1,
+      ad: 1,
       simulationOpen: false,
     }
   }
