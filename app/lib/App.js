@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
+import { omit } from 'lodash';
 import inputs from './constants/inputs';
 import InputBox from './components/inputBox';
 import Simulation from './components/simulation';
@@ -15,6 +16,7 @@ class App extends PureComponent {
       Ty: 0,
       aa: 0,
       ad: 0,
+      simulationOpen: false,
     }
   }
 
@@ -22,8 +24,13 @@ class App extends PureComponent {
     this.setState({ [fieldName]: value });
   }
 
+  openSimulation = () => {
+    this.setState({ simulationOpen: true })
+  }
+
   render() {
-    const data = { ...this.state };
+    const data = omit(this.state, 'simulationOpen');
+    const { simulationOpen } = this.state;
     return (
       <div className='container'>
         <ul className='inputs-container'>
@@ -35,15 +42,17 @@ class App extends PureComponent {
             />
           ))}
         </ul>
-        <div className='proceed-btn'>
+        <div className='proceed-btn' onClick={this.openSimulation}>
           <span className="block-button text-bordered" style={{ borderColor: 'rgb(0, 0, 0)' }}>
             <span className="bg"></span>
             <span className="text" style={{ color: 'rgb(0, 0, 0)' }}>Proceed to the simulation</span>
           </span>
         </div>
-        <Simulation
-          data={data}
-        />
+        {simulationOpen &&
+          <Simulation
+            data={data}
+          />
+        }
       </div>
     );
   }
