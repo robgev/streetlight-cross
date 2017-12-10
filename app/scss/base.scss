@@ -106,10 +106,11 @@ li { padding-left:1em; }
 .proceed-btn {
   display: flex;
   justify-content: center;
+	outline: none;
 }
 
 .body-wrapper {
-  display: flex;
+	display: flex;
   .simulation-container {
     padding: 1em;
   }

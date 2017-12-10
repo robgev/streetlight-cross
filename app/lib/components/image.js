@@ -24,8 +24,8 @@ class Car extends PureComponent {
 			<Image
 				x={x}
 				y={y}
-				width={150}
-				height={48}
+				width={100}
+				height={32}
 				image={this.state.image}
 			/>
 		);
