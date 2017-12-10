@@ -29,17 +29,19 @@ class InputBox extends PureComponent {
   }
 
   render() {
-    const { name } = this.props;
+    const { min, max, name } = this.props;
     const { incorrect } = this.state;
     return (
       <li className='input-wrapper'>
         <input
+          min={min}
+          max={max}
           type='number'
           placeholder={name}
           onChange={this.handleInputChange}
         />
         <p className={incorrect ? 'show' : ''}>
-          The inputted value is out of range
+          The inputted value is out of range. Input something between { min } and { max }.
         </p>
       </li>
     );
