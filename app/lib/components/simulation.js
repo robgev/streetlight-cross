@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Stage, Layer } from 'react-konva';
+import { Stage, Layer, Rect, Text } from 'react-konva';
 import Car from './image';
 
 class Simulation extends PureComponent {
@@ -31,10 +31,9 @@ tick = () => {
 	} = this.props;
 	const newX1 = x0 + (v0 * t) + ((aa * (t ** 2)) / 2);
 	const newX2 = (x0 + (v0 * t)) - ((ad * (t ** 2)) / 2);
-	const car2Stopped = newX2 - car2Pos > 0;
+	const car2Stopped = newX2 - car2Pos < 0;
 	const car1Passed = newX1 >= x0 + d0 + L;
-	console.log(newX2);
-	if (car2Stopped && car1Passed) {
+	if (t >= 3) {
 		cancelAnimationFrame(this.request);
 	} else {
 		const x1 = car1Passed ? car1Pos : newX1;
@@ -44,15 +43,28 @@ tick = () => {
 	}
 }
 
+componentWillReceiveProps() {
+	this.setState({
+		x0: 0,
+		x1: 0,
+		x2: 0,
+		t: 0,
+	});
+	this.request = requestAnimationFrame(this.tick);
+}
+
 render() {
-	const { x1, x2 } = this.state;
+	const { x1, x2, t } = this.state;
+	const { d0, L } = this.props;
 	const width = window.innerWidth * 0.7;
 	const height = window.innerHeight - 400;
 	// width = 120m
-	// ? = Xm
+	// ? = 100m
 	const metersToPixels = width / 120;
 	const car1Position = x1 * metersToPixels;
 	const car2Position = x2 * metersToPixels;
+	const crossStart = d0 * metersToPixels;
+	const crossEnd = (d0 + L) * metersToPixels;
 	return (
 		<Stage
 			width={width}
@@ -60,8 +72,27 @@ render() {
 			className="simulation-container"
 		>
 			<Layer>
+				<Text
+					x={width / 2}
+					align="center"
+					text={`Time: ${t}`}
+				/>
 				<Car x={car1Position} y={height / 2} />
 				<Car x={car2Position} y={(height / 2) + 40} />
+				<Rect
+					y={40}
+					width={1}
+					fill="red"
+					x={crossStart}
+					height={height - 40}
+				/>
+				<Rect
+					y={40}
+					width={1}
+					fill="green"
+					x={crossEnd}
+					height={height - 40}
+				/>
 			</Layer>
 		</Stage>
 	);

@@ -16,13 +16,14 @@ class App extends PureComponent {
 			Ty: 2,
 			aa: 1,
 			ad: 1,
+			simulationCount: 0,
 			v0: (20 * 1000) / 3600,
-			simulationOpen: false,
 		};
 	}
 
 setFieldValue = (fieldKey, value) => {
-	const convertedValue = fieldKey === 'v0' ? (value * 1000) / 3600 : value; // convert to m/s
+	const sanitizedValue = parseInt(value, 10);
+	const convertedValue = fieldKey === 'v0' ? (sanitizedValue * 1000) / 3600 : sanitizedValue; // convert to m/s
 	this.setState({ [fieldKey]: convertedValue });
 }
 
@@ -51,12 +52,12 @@ determinePassState = () => {
 }
 
 openSimulation = () => {
-	this.setState({ simulationOpen: true });
+	this.setState({ simulationCount: this.state.simulationCount + 1 });
 }
 
 render() {
-	const data = omit(this.state, 'simulationOpen');
-	const { simulationOpen } = this.state;
+	const data = omit(this.state, 'simulationCount');
+	const { simulationCount } = this.state;
 	const passText = this.determinePassState();
 	return (
 		<div className="container">
@@ -70,11 +71,11 @@ render() {
 				))}
 			</ul>
 			<Button onClick={this.openSimulation} />
-			{simulationOpen &&
+			{!!simulationCount &&
 			<div>
 				<p>{passText}</p>
 				<div className="body-wrapper">
-					<Simulation {...data} />
+					<Simulation {...data} shouldSimulateAgain={simulationCount} />
 					{/* <Graphs data={data} /> */}
 				</div>
 			</div>
