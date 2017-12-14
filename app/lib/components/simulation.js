@@ -28,12 +28,13 @@ tick = () => {
 		L,
 		aa,
 		ad,
+		Ty,
 	} = this.props;
 	const newX1 = x0 + (v0 * t) + ((aa * (t ** 2)) / 2);
 	const newX2 = (x0 + (v0 * t)) - ((ad * (t ** 2)) / 2);
 	const car2Stopped = newX2 - car2Pos < 0;
-	const car1Passed = newX1 >= x0 + d0 + L;
-	if (t >= 3) {
+	const car1Passed = t >= Ty;
+	if (car1Passed && car2Stopped) {
 		cancelAnimationFrame(this.request);
 	} else {
 		const x1 = car1Passed ? car1Pos : newX1;
@@ -75,7 +76,7 @@ render() {
 				<Text
 					x={width / 2}
 					align="center"
-					text={`Time: ${t}`}
+					text={`Elapsed Time: ${t}`}
 				/>
 				<Car x={car1Position} y={height / 2} />
 				<Car x={car2Position} y={(height / 2) + 40} />
