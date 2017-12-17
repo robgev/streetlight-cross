@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import { omit } from 'lodash';
 
 import inputs from './constants/inputs';
-import InputBox from './components/inputBox';
-import Simulation from './components/simulation';
 import Button from './components/button';
+import InputBox from './components/inputBox';
+import Experiment from './components/experiment';
 
 export default
 class App extends PureComponent {
@@ -16,7 +16,7 @@ class App extends PureComponent {
 			Ty: 2,
 			aa: 1,
 			ad: 1,
-			simulationCount: 0,
+			experimentNumber: 0,
 			v0: (20 * 1000) / 3600,
 		};
 	}
@@ -51,13 +51,13 @@ determinePassState = () => {
 	}
 }
 
-openSimulation = () => {
-	this.setState({ simulationCount: this.state.simulationCount + 1 });
+openExperiment = () => {
+	this.setState({ experimentNumber: this.state.experimentNumber + 1 });
 }
 
 render() {
-	const data = omit(this.state, 'simulationCount');
-	const { simulationCount } = this.state;
+	const data = omit(this.state, 'experimentNumber');
+	const { experimentNumber } = this.state;
 	const passText = this.determinePassState();
 	return (
 		<div className="container">
@@ -70,14 +70,14 @@ render() {
 					/>
 				))}
 			</ul>
-			<Button onClick={this.openSimulation} />
-			{!!simulationCount &&
+			<Button onClick={this.openExperiment} />
+			{!!experimentNumber &&
 			<div>
 				<p>{passText}</p>
-				<div className="body-wrapper">
-					<Simulation {...data} shouldSimulateAgain={simulationCount} />
-					{/* <Graphs data={data} /> */}
-				</div>
+				<Experiment
+					data={data}
+					experimentNumber={experimentNumber}
+				/>
 			</div>
 			}
 		</div>
