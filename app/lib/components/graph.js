@@ -8,6 +8,7 @@ import {
 } from 'victory';
 
 const Chart = ({
+	constantLines,
 	yLabel, xLabel,
 	line1Data, line2Data,
 }) => (
@@ -45,6 +46,16 @@ const Chart = ({
 		<VictoryLine
 			data={line2Data}
 		/>
+		{constantLines.map(lineY => (
+			<VictoryLine
+				key={lineY}
+				data={[
+					{ x: 0, y: lineY },
+					{ x: 20, y: lineY },
+				]}
+			/>
+		))
+		}
 	</VictoryChart>
 );
 

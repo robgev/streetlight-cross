@@ -81,7 +81,9 @@ class Experiment extends PureComponent {
 					resetCoordinateData={this.resetCoordinateData}
 				/>
 				<Graphs
+					L={data.L}
 					v0={data.v0}
+					d0={data.d0}
 					x1Data={graph1Data}
 					x2Data={graph2Data}
 					v1Data={velocity1Data}
